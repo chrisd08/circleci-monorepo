@@ -29,7 +29,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "cross-env": "^5.2.0",
-    "netlify-cli": "^2.8.3"
+    "cross-env": "^5.2.0"
   }
 }
