@@ -6,7 +6,6 @@
     "lerna": "^3.13.1"
   },
   "scripts": {
-    "build": "lerna run build --scope={circleci-react}",
     "ci:test": "lerna run ci:test",
     "ci:deploy": "lerna run ci:deploy --since $TAG",
     "new-version": "lerna version --conventional-commits --yes"
@@ -15,5 +14,8 @@
     "packages": [
       "packages/*"
     ]
+  },
+  "engines": {
+    "node": "10.3.0"
   }
 }
