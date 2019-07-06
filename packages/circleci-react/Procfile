@@ -1,1 +1,1 @@
-web: ls
+web: cd packages/circleci-react && yarn start
