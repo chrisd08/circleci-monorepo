@@ -1,1 +1,1 @@
-web: cd circleci-react && node server.js
+web: ls && cd packages/circleci-react && node server.js
