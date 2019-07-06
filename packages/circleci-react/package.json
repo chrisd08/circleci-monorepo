@@ -5,7 +5,8 @@
   "dependencies": {
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "cross-env": "^5.2.0"
   },
   "scripts": {
     "start": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts start",
@@ -26,7 +27,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "netlify-cli": "^2.8.3",
-    "cross-env": "^5.2.0"
+    "netlify-cli": "^2.8.3"
   }
 }
