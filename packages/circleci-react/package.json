@@ -14,8 +14,7 @@
     "eject": "react-scripts eject",
     "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\"",
     "ci:test": "npm run test",
-    "ci:deploy": "npm run build && npm run netlify:deploy",
-    "heroku-postbuild": "npm run build"
+    "ci:deploy": "npm run build && npm run netlify:deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,6 +26,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "netlify-cli": "^2.8.3"
+    "netlify-cli": "^2.8.3",
+    "cross-env": "^5.2.0"
   }
 }
