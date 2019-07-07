@@ -1,1 +1,1 @@
-web: bin/boot
+web: cd packages/circleci-react && node server.js
