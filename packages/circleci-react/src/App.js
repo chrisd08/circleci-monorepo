@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
 import logo from "./logo.svg";
-
+import { DISPLAY_ERROR_CODE } from "@codeponder/common";
 class App extends Component {
   render() {
+    console.log(DISPLAY_ERROR_CODE);
     return (
       <div className="App">
         <header className="App-header">
