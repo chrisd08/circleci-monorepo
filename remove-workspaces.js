@@ -1,5 +1,6 @@
 const { exec } = require("child_process");
 const app = process.env["APP_WORKSPACE"];
+const fs = require("fs");
 
 exec("yarn workspaces info --json", (err, stdout, stderr) => {
   const output = JSON.parse(stdout);
@@ -13,6 +14,13 @@ exec("yarn workspaces info --json", (err, stdout, stderr) => {
 
   console.log("\t", "----->", "Pruning unused workspaces:", unneeded);
   unneeded.forEach(i => exec(`rm -rf ${i}`));
+
+  const path = `${__dirname}/packages/${app}/Procfile`;
+  console.log(fs.existsSync(path));
+  console.log(path);
+  if (fs.existsSync(path)) {
+    console.log("\t", "----->", "Moving Procfile to root");
+  }
 });
 
 // Gather all of the workspaces that `workspace` depends on
