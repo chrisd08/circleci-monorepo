@@ -8,7 +8,10 @@
   "scripts": {
     "ci:test": "lerna run ci:test",
     "ci:deploy": "lerna run ci:deploy --since $TAG",
-    "new-version": "lerna version --conventional-commits --yes"
+    "new-version": "lerna version --conventional-commits --yes",
+    "build": "echo Packages were built in previous step...",
+    "heroku-prebuild": "node remove-workspaces.js",
+    "heroku-postbuild": "node build-workspaces.js"
   },
   "workspaces": {
     "packages": [
