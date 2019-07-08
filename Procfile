@@ -1,0 +1,1 @@
+web: cd packages/circleci-node && ts-node -T src/index.ts

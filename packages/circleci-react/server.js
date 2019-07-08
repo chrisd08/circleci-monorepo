@@ -1,4 +1,4 @@
-const express = require('express')
+/* const express = require('express')
 const proxy = require('http-proxy-middleware')
 const path = require('path')
 
@@ -12,4 +12,4 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 
-app.listen(PORT, () => console.log(`Listening on :${PORT}`))
+app.listen(PORT, () => console.log(`Listening on :${PORT}`)) */
