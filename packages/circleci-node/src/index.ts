@@ -1,8 +1,17 @@
 import "reflect-metadata";
-import { createConnection } from "typeorm";
+import { createConnection, getConnectionOptions } from "typeorm";
 import { User } from "./entity/User";
 
-createConnection()
+const createTypeormConn = async () => {
+  const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
+  return process.env.NODE_ENV === "production"
+    ? createConnection({
+        ...connectionOptions,
+        url: process.env.DATABASE_URL,
+      } as any)
+    : createConnection({ ...connectionOptions });
+};
+createTypeormConn()
   .then(async connection => {
     console.log("Inserting a new user into the database...");
     const user = new User();
