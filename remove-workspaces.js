@@ -17,7 +17,7 @@ exec("yarn workspaces info --json", (err, stdout, stderr) => {
 
   const path = `${__dirname}/packages/${app}/Procfile`;
   if (fs.existsSync(path)) {
-    fs.rename(path, `${__dirname}/Procfile`);
+    fs.rename(path, `${__dirname}/Procfile`, () => {});
   }
 });
 
