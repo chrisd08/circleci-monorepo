@@ -28,9 +28,7 @@ jobs:
             - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - yarn-packages-v1-{{ .Branch }}-
             - yarn-packages-v1-
-      - run: echo $PATH
-      - run: sudo apt-get update && sudo apt-get install yarn && yarn -v
-      - run: echo $PATH
+      - run: sudo apt-get install yarn && yarn -v
       - run: yarn install --freeze-lockfile
       - save_cache:
           paths:
