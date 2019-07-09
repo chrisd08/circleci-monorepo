@@ -17,7 +17,7 @@ exec("yarn workspaces info --json", (err, stdout, stderr) => {
 
   const procfilePath = `${__dirname}/../packages/${app}/Procfile`;
   if (fs.existsSync(procfilePath)) {
-    fs.rename(procfilePath, `${__dirname}/Procfile`, () => {
+    fs.rename(procfilePath, `${__dirname}/../Procfile`, () => {
       console.log("\t", "----->", "Moved Procfile to root");
     });
   }
