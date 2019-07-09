@@ -17,9 +17,7 @@ jobs:
       - compare-url/reconstruct
       - compare-url/use:
           custom-logic: |
-            echo `git log --format="" --name-only ${CIRCLE_COMPARE_URL##http*/} | cut -d"/" -f1 | sort -u`;
-            echo ${CIRCLE_COMPARE_URL##http*/};
-            for folder in `git log --format="" --name-only ${CIRCLE_COMPARE_URL##http*/} | cut -d"/" -f1 | sort -u`; do
-             echo "contents in $folder were modified"
+            for f in `git log --format="" --name-only ${CIRCLE_COMPARE_URL##http*/} packages | cut -d"/" -f2 | sort -u`; do
+             echo "contents in $f were modified"
             done
           step-name: Publish modified orbs
