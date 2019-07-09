@@ -4,20 +4,40 @@ orbs:
   compare-url: iynere/compare-url@1.2.0
 
 workflows:
-  publish-orbs:
-    jobs:
-      - publish
+  publish-orbs: jobs:q
+    - publish
 
 jobs:
   publish:
     docker:
       - image: circleci/circleci-cli
+      - image: node:11.10.1
+      - image: circleci/postgres:11-alpine-ram
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: example12
+      - image: redis:latest
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-v1-{{ .Branch }}-
+            - yarn-packages-v1-
+      - run: yarn install --freeze-lockfile
+      - save_cache:
+          paths:
+            - ~/.cache/yarn
+          key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run: yarn ci:test
+
+      # deploy
       - compare-url/reconstruct
       - compare-url/use:
           custom-logic: |
             for f in `git log --format="" --name-only ${CIRCLE_COMPARE_URL##http*/} packages | cut -d"/" -f2 | sort -u`; do
-             echo "contents in $f were modified"
+             yarn run ci:deploy:$f
             done
-          step-name: Publish modified orbs
+          step-name: Deploy
