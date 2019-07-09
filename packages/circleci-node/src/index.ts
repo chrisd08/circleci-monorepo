@@ -26,6 +26,6 @@ createTypeormConn()
     console.log("Loaded users: ", users);
 
     console.log("Here you can setup and run express/koa/any other framework.");
-    console.log("test change again");
+    console.log("test change");
   })
   .catch(error => console.log(error));
