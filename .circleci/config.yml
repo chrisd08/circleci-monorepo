@@ -4,8 +4,9 @@ orbs:
   compare-url: iynere/compare-url@1.2.0
 
 workflows:
-  publish-orbs: jobs:q
-    - publish
+  publish-orbs:
+    jobs:
+      - publish
 
 jobs:
   publish:
