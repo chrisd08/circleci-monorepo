@@ -5,6 +5,7 @@ import { DISPLAY_ERROR_CODE } from "@codeponder/common";
 class App extends Component {
   render() {
     console.log(DISPLAY_ERROR_CODE);
+    console.log("test change");
     return (
       <div className="App">
         <header className="App-header">
