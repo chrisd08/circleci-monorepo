@@ -27,19 +27,17 @@ jobs:
             - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - yarn-packages-v1-{{ .Branch }}-
             - yarn-packages-v1-
-      - run: yarn -v
-      #- run: yarn install --freeze-lockfile
-      #- save_cache:
-      #    paths:
-      #      - ~/.cache/yarn
-      #    key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      #- run: yarn ci:test
-
+      - run: yarn install --freeze-lockfile
+      - save_cache:
+          paths:
+            - ~/.cache/yarn
+          key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run: yarn ci:test
       # deploy
       - compare-url/reconstruct
       - compare-url/use:
           custom-logic: |
             for f in `git log --format="" --name-only ${CIRCLE_COMPARE_URL##http*/} packages | cut -d"/" -f2 | sort -u`; do
-             echo $f
+             yarn run ci:deploy:$f
             done
           step-name: Deploy
