@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "devDependencies": {
-    "lerna": "^3.13.1"
+    "lerna": "^3.15.0"
   },
   "scripts": {
     "ci:test": "lerna run ci:test",
