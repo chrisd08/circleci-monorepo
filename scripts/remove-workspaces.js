@@ -15,7 +15,7 @@ exec("yarn workspaces info --json", (err, stdout, stderr) => {
   console.log("\t", "----->", "Pruning unused workspaces:", unneeded);
   unneeded.forEach(i => exec(`rm -rf ${i}`));
 
-  const procfilePath = `${__dirname}/packages/${app}/Procfile`;
+  const procfilePath = `${__dirname}/../packages/${app}/Procfile`;
   if (fs.existsSync(procfilePath)) {
     fs.rename(procfilePath, `${__dirname}/Procfile`, () => {
       console.log("\t", "----->", "Moved Procfile to root");
