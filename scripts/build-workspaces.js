@@ -11,7 +11,7 @@ exec('yarn workspaces info --json', (err, stdout, stderr) => {
 
   dependencies.forEach(wp => {
     const build = spawn('yarn', ['build'], {
-      cwd: __dirname + '/' + wp.location,
+      cwd: __dirname + '/../' + wp.location,
     });
     build.stdout.on('data', data => {
       console.log(data.toString());
