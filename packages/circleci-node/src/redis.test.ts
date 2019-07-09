@@ -1,4 +1,4 @@
-/* import * as Redis from "ioredis";
+import * as Redis from "ioredis";
 
 describe("redis tests", () => {
   it("ping", async () => {
@@ -7,4 +7,3 @@ describe("redis tests", () => {
     await redis.ping();
   });
 });
- */

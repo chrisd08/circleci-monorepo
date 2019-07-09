@@ -22,12 +22,9 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "test": "cross-env NODE_ENV=test jest",
-    "docker:build": "docker build -t benawad/example:latest .",
-    "docker:login": "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD",
-    "docker:push": "docker push benawad/example:latest",
-    "ci:docker": "npm run docker:build && npm run docker:login && npm run docker:push",
     "ci:test": "cross-env NODE_ENV=test jest --ci --runInBand --detectOpenHandles --forceExit",
-    "ci:deploy": "npm run ci:docker"
+    "ci:deploy": "npm run heroku:deploy",
+    "heroku:deploy": "git push https://heroku:$HEROKU_API_KEY@git.heroku.com/insulution-prod.git master"
   },
   "workspaces": {
     "nohoist": [
