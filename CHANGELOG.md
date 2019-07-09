@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/chrisd08/circleci-monorepo/compare/v0.1.21...v1.0.1) (2019-07-09)
+
+**Note:** Version bump only for package circleci-monorepo
+
+
+
+
+
 ## [0.1.21](https://github.com/benawad/circleci-monorepo/compare/v0.1.20...v0.1.21) (2019-03-15)
 
 **Note:** Version bump only for package circleci-monorepo
