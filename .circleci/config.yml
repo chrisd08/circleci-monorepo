@@ -13,6 +13,10 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "ed:9c:0c:76:d9:20:74:82:45:5c:b4:c3:3e:9b:25:5a"
+
       - checkout:
           post:
             - git fetch --all
