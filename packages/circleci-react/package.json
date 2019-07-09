@@ -15,7 +15,7 @@
     "eject": "react-scripts eject",
     "ci:test": "npm run test",
     "ci:deploy": "npm run heroku:deploy",
-    "heroku:deploy": "git push https://heroku:$HEROKU_API_KEY@git.heroku.com/insulution-web.git master"
+    "heroku:deploy": "git push https://heroku:$HEROKU_API_KEY@git.heroku.com/insolution-web.git master"
   },
   "eslintConfig": {
     "extends": "react-app"

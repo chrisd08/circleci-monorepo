@@ -24,7 +24,7 @@
     "test": "cross-env NODE_ENV=test jest",
     "ci:test": "cross-env NODE_ENV=test jest --ci --runInBand --detectOpenHandles --forceExit",
     "ci:deploy": "npm run heroku:deploy",
-    "heroku:deploy": "git push https://heroku:$HEROKU_API_KEY@git.heroku.com/insulution-prod.git master"
+    "heroku:deploy": "git push https://heroku:$HEROKU_API_KEY@git.heroku.com/insolution-prod.git master"
   },
   "workspaces": {
     "nohoist": [
