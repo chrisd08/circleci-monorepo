@@ -1,3 +1,13 @@
+version: 2.1
+
+orbs:
+  compare-url: iynere/compare-url@1.2.0
+
+workflows:
+  publish-orbs:
+    jobs:
+      - publish
+
 jobs:
   publish:
     docker:
@@ -7,14 +17,7 @@ jobs:
       - compare-url/reconstruct
       - compare-url/use:
           custom-logic: |
-            for folder in `git log --format="" --name-only ${CIRCLE_COMPARE_URL##http*/} | cut -d"/" -f1 | sort -u`; do
+            for folder in packages/`git log --format="" --name-only ${CIRCLE_COMPARE_URL##http*/} | cut -d"/" -f1 | sort -u`; do
              echo "contents in $folder were modified"
             done
           step-name: Publish modified orbs
-orbs:
-  compare-url: iynere/compare-url@1.2.0
-version: 2.1
-workflows:
-  publish-orbs:
-    jobs:
-      - publish
