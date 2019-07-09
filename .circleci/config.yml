@@ -30,9 +30,9 @@ jobs:
       - run: yarn -v
       #- run: yarn install --freeze-lockfile
       #- save_cache:
-          paths:
-            - ~/.cache/yarn
-          key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      #    paths:
+      #      - ~/.cache/yarn
+      #    key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
       #- run: yarn ci:test
 
       # deploy
