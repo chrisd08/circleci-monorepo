@@ -4,12 +4,12 @@ orbs:
   compare-url: iynere/compare-url@1.2.0
 
 workflows:
-  publish-orbs:
+  main:
     jobs:
-      - publish
+      - build
 
 jobs:
-  publish:
+  build:
     docker:
       - image: circleci/circleci-cli
       - image: node:11.10.1
@@ -19,6 +19,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: example12
       - image: redis:latest
+    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
