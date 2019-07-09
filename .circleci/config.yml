@@ -12,7 +12,7 @@ jobs:
             done
           step-name: Publish modified orbs
 orbs:
-  compare-url: iynere/compare-url@x.y.z
+  compare-url: iynere/compare-url@1.2.0
 version: 2.1
 workflows:
   publish-orbs:
