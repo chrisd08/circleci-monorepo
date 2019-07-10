@@ -37,8 +37,5 @@ jobs:
       # deploy
       - compare-url/reconstruct
       - compare-url/use:
-          custom-logic: |
-            for f in `git log --format="" --name-only ${CIRCLE_COMPARE_URL##http*/} packages | cut -d"/" -f2 | sort -u`; do
-             yarn run ci:deploy:$f
-            done
+          custom-logic: node scripts/deploy-workspaces
           step-name: Deploy
