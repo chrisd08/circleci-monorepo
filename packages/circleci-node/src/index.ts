@@ -18,7 +18,7 @@ createTypeormConn()
   .then(async connection => {
     console.log("Inserting a new user into the database...");
     const user = new User();
-    user.firstName = "Timber9";
+    user.firstName = "Timber8";
     user.lastName = "Saw";
     user.age = 25;
     await connection.manager.save(user);
