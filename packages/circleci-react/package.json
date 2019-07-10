@@ -1,9 +1,9 @@
 {
   "name": "circleci-react",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "private": true,
   "dependencies": {
-    "@codeponder/common": "^1.0.12",
+    "@codeponder/common": "^1.0.13",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.8"
