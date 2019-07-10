@@ -1,8 +1,10 @@
-const { exec } = require("child_process");
-const app = process.env["APP_WORKSPACE"];
-const fs = require("fs");
+import { exec } from "child_process";
+import { existsSync, rename } from "fs";
+import gatherDependencies from "./gather-dependencies";
 
-exec("yarn workspaces info --json", (err, stdout, stderr) => {
+const app = process.env["APP_WORKSPACE"];
+
+exec("yarn workspaces info --json", (err, stdout) => {
   const output = JSON.parse(stdout);
   const info = JSON.parse(output.data);
 
@@ -16,23 +18,9 @@ exec("yarn workspaces info --json", (err, stdout, stderr) => {
   unneeded.forEach(i => exec(`rm -rf ${i}`));
 
   const procfilePath = `${__dirname}/../packages/${app}/Procfile`;
-  if (fs.existsSync(procfilePath)) {
-    fs.rename(procfilePath, `${__dirname}/../Procfile`, () => {
+  if (existsSync(procfilePath)) {
+    rename(procfilePath, `${__dirname}/../Procfile`, () => {
       console.log("\t", "----->", "Moved Procfile to root");
     });
   }
 });
-
-// Gather all of the workspaces that `workspace` depends on
-function gatherDependencies(info, workspace) {
-  let deps = [workspace];
-  let ws = [workspace];
-  while (ws.length) {
-    info[ws[0]].workspaceDependencies.forEach(w => {
-      ws.push(w);
-      deps.push(w);
-    });
-    ws.shift();
-  }
-  return deps;
-}

@@ -3,18 +3,50 @@
   "private": true,
   "version": "1.0.0",
   "devDependencies": {
-    "lerna": "^3.15.0"
+    "lerna": "^3.15.0",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.5",
+    "@typescript-eslint/eslint-plugin": "^1.4.2",
+    "@typescript-eslint/parser": "^1.4.2",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.15.1",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-react-app": "^3.0.8",
+    "eslint-plugin-flowtype": "^3.4.2",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "typescript": "3.3.3333"
   },
   "scripts": {
     "ci:test": "lerna run ci:test",
     "ci:deploy:circleci-node": "lerna run ci:deploy --scope={@codeponder/common,circleci-node}",
     "ci:deploy:circleci-react": "lerna run ci:deploy --scope={@codeponder/common,circleci-react}",
     "heroku-prebuild": "node scripts/remove-workspaces.js",
-    "heroku-postbuild": "node scripts/build-workspaces.js"
+    "heroku-postbuild": "node scripts/build-workspaces.js",
+    "lint": "eslint --fix -c .eslintrc.js --ignore-path .gitignore --cache --ext .js,.ts,.tsx ."
   },
   "workspaces": {
     "packages": [
       "packages/*"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc -p packages/circleci-node/tsconfig.json --noEmit && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "packages/circleci-node/src/**/*.{ts}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "packages/circleci-react/src/**/*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
     ]
   }
 }

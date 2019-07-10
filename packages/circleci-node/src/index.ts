@@ -1,14 +1,17 @@
 import "reflect-metadata";
-import { createConnection, getConnectionOptions } from "typeorm";
+import { createConnection, getConnectionOptions, Connection } from "typeorm";
 import { User } from "./entity/User";
+import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
 
-const createTypeormConn = async () => {
-  const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
+const createTypeormConn = async (): Promise<Connection> => {
+  const connectionOptions = (await getConnectionOptions(
+    process.env.NODE_ENV
+  )) as PostgresConnectionOptions;
   return process.env.NODE_ENV === "production"
     ? createConnection({
         ...connectionOptions,
         url: process.env.DATABASE_URL,
-      } as any)
+      })
     : createConnection({ ...connectionOptions });
 };
 createTypeormConn()
