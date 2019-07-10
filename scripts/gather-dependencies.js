@@ -1,5 +1,5 @@
 // Gather all of the workspaces that `workspace` depends on
-export default function gatherDependencies(info, workspace) {
+exports.gatherDependencies = (info, workspace) => {
   let deps = [workspace];
   let ws = [workspace];
   while (ws.length) {
@@ -10,4 +10,4 @@ export default function gatherDependencies(info, workspace) {
     ws.shift();
   }
   return deps;
-}
+};
