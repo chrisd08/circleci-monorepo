@@ -32,8 +32,21 @@ jobs:
           paths:
             - ~/.cache/yarn
           key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - run: yarn lint
-      - run: yarn ci:test
+      - run:
+          name: Install JUnit coverage reporter
+          command: yarn add --dev jest-junit
+      - run:
+          name: "Linter"
+          command: yarn lint -- -- --format junit -o reports/junit/js-lint-results.xml
+      - run:
+          name: "Test Suite"
+          environment:
+            JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
+          command: yarn ci:test -- -- --ci --runInBand --testResultsProcessor="jest-junit"
+      - store_test_results:
+          path: reports/junit
+      - store_artifacts:
+          path: reports/junit
       # deploy
       - compare-url/reconstruct
       - compare-url/use:
