@@ -39,12 +39,10 @@
   },
   "lint-staged": {
     "packages/circleci-node/src/**/*.{ts}": [
-      "prettier --write",
       "eslint --fix",
-      "git add"
+       "git add"
     ],
     "packages/circleci-react/src/**/*.{js,jsx}": [
-      "prettier --write",
       "eslint --fix",
       "git add"
     ]

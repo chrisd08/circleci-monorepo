@@ -1,8 +1,8 @@
 import { createConnection } from "typeorm";
 import { User } from "./entity/User";
 
-describe("db tests", (): void => {
-  it("create user", async (): Promise<void> => {
+describe("db tests", () => {
+  it("create user", async () => {
     const connection = await createConnection();
     const user = new User();
     user.firstName = "Timber";
