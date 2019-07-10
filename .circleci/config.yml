@@ -32,6 +32,7 @@ jobs:
           paths:
             - ~/.cache/yarn
           key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run: tsc -p packages/circleci-node/tsconfig.json --noEmit
       - run: yarn lint
       - run: yarn ci:test
       # deploy
