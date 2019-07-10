@@ -7,7 +7,7 @@ const createTypeormConn = async (): Promise<Connection> => {
   const connectionOptions = (await getConnectionOptions(
     process.env.NODE_ENV
   )) as PostgresConnectionOptions;
-  return process.env.NODE_ENV === "production"
+  return process.env.NODE_ENV == "production"
     ? createConnection({
         ...connectionOptions,
         url: process.env.DATABASE_URL,

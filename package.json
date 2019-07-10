@@ -25,7 +25,7 @@
     "ci:deploy:circleci-react": "lerna run ci:deploy --scope={@codeponder/common,circleci-react}",
     "heroku-prebuild": "node scripts/remove-workspaces.js",
     "heroku-postbuild": "node scripts/build-workspaces.js",
-    "lint": "eslint --fix -c .eslintrc.js --ignore-path .gitignore --cache --ext .js,.ts,.tsx ."
+    "lint": "eslint  --max-warnings 0 --fix -c .eslintrc.js --ignore-path .gitignore --cache --ext .js,.jsx,.ts,.tsx ."
   },
   "workspaces": {
     "packages": [
@@ -38,13 +38,8 @@
     }
   },
   "lint-staged": {
-    "packages/circleci-node/src/**/*.{ts}": [
-      "eslint --fix",
-       "git add"
-    ],
-    "packages/circleci-react/src/**/*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
+    "packages/**/src/**/*.{js,jsx,ts,tsx}": [
+      "yarn lint"
     ]
   }
 }
