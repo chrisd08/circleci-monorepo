@@ -34,11 +34,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsc -p packages/circleci-node/tsconfig.json --noEmit && lint-staged"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "packages/**/src/**/*.{js,jsx,ts,tsx}": [
+      "tsc -p packages/circleci-node/tsconfig.json --noEmit",
       "yarn run --silent lint",
       "git add"
     ]
