@@ -42,7 +42,7 @@ jobs:
           name: "Test Suite"
           environment:
             JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
-          command: yarn ci:test -- -- --ci --runInBand --reporters=default --reporters=jest-junit
+          command: yarn ci:test -- -- --ci --runInBand --testResultsProcessor="jest-junit"
       - store_test_results:
           path: reports/junit
       - store_artifacts:
