@@ -1,5 +1,6 @@
-import { exec, spawn } from "child_process";
+/* eslint-disable @typescript-eslint/no-var-requires */
 import gatherDependencies from "./gather-dependencies";
+const { exec, spawn } = require("child_process");
 
 const app = process.env["APP_WORKSPACE"];
 

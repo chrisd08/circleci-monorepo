@@ -1,7 +1,7 @@
-import { exec } from "child_process";
-import { existsSync, rename } from "fs";
+/* eslint-disable @typescript-eslint/no-var-requires */
 import gatherDependencies from "./gather-dependencies";
-
+const { exec } = require("child_process");
+const { existsSync, rename } = require("fs");
 const app = process.env["APP_WORKSPACE"];
 
 exec("yarn workspaces info --json", (err, stdout) => {
