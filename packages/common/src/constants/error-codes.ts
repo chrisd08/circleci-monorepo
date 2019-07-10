@@ -1,1 +1,1 @@
-export const DISPLAY_ERROR_CODE = "display error test";
+export const DISPLAY_ERROR_CODE = "display error";
