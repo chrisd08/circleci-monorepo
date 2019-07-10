@@ -25,13 +25,7 @@ async function deploy() {
     return package.scripts && package.scripts["ci:deploy"];
   };
 
-  const needsDeploy = [];
-
-  for (const workspace of Object.keys(workspaces)) {
-    if (hasChanged(workspace) && canDeploy(workspace)) {
-      needsDeploy.push(workspace);
-    }
-  }
+  const needsDeploy = Object.keys(workspaces).filter(ws => hasChanged(ws) && canDeploy(ws));
 
   if (needsDeploy.length) {
     console.log("\n", "----->", "Deploying workspaces:", needsDeploy.join(", "));

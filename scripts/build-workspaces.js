@@ -3,31 +3,19 @@ const { exec, spawn } = require("child_process");
 
 const app = process.env["APP_WORKSPACE"];
 
-// Gather all of the workspaces that `workspace` depends on
-function gatherDependencies(info, workspace) {
-  let deps = [workspace];
-  let ws = [workspace];
-  while (ws.length) {
-    ws[0].workspaceDependencies.forEach(w => {
-      ws.push(info[w]);
-      deps.push(info[w]);
-    });
-    ws.shift();
-  }
-  return deps;
-}
-
-exec("yarn workspaces info --json", (err, stdout) => {
-  const output = JSON.parse(stdout);
-  const info = JSON.parse(output.data);
-
-  const dependencies = gatherDependencies(info, info[app]);
-
-  console.log("\n", "----->", "Building workspaces:", app.split(","));
-
-  dependencies.forEach(wp => {
+exec("yarn workspaces info --json", (_err, stdout) => {
+  const info = JSON.parse(JSON.parse(stdout).data);
+  const getDependencies = (workspace, deps = []) => {
+    deps.push(workspace);
+    workspace.workspaceDependencies.forEach(dep => getDependencies(info[dep], deps));
+    return deps;
+  };
+  const dependencies = getDependencies(info[app]);
+  console.log("\n", "----->", "Building workspaces");
+  dependencies.forEach(dep => {
+    console.log("\n", "----->", `Building ${dep.location}`);
     const build = spawn("yarn", ["build"], {
-      cwd: __dirname + "/../" + wp.location,
+      cwd: __dirname + "/../" + dep.location,
     });
     build.stdout.on("data", data => {
       console.log(data.toString());
