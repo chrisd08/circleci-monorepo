@@ -1,8 +1,21 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { gatherDependencies } = require("./gather-dependencies");
 const { exec } = require("child_process");
 const { existsSync, rename } = require("fs");
 const app = process.env["APP_WORKSPACE"];
+
+// Gather all of the workspaces that `workspace` depends on
+function gatherDependencies(info, workspace) {
+  let deps = [workspace];
+  let ws = [workspace];
+  while (ws.length) {
+    info[ws[0]].workspaceDependencies.forEach(w => {
+      ws.push(w);
+      deps.push(w);
+    });
+    ws.shift();
+  }
+  return deps;
+}
 
 exec("yarn workspaces info --json", (err, stdout) => {
   const output = JSON.parse(stdout);
