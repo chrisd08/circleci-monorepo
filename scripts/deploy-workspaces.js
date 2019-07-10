@@ -18,11 +18,10 @@ function gatherDependencies(info, workspace) {
 }
 
 async function deploy() {
-  console.log(process.env["CIRCLE_COMPARE_URL"]);
-
+  const range = process.env["CIRCLE_COMPARE_URL"].split("/").pop();
   let { stdout: workspaces } = await exec("yarn workspaces info --json");
   let { stdout: changed } = await exec(
-    'git log --format="" --name-only c6900a6af77295e2eac7f5879fc9cf2b572e6e22...ad384636f335edfb99d511263bd877113fbcc7d8 packages'
+    `git log --format="" --name-only ${range} packages`
   );
   workspaces = JSON.parse(JSON.parse(workspaces).data);
   changed = new Set(
