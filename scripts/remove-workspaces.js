@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import gatherDependencies from "./gather-dependencies";
+const gatherDependencies = require("./gather-dependencies");
 const { exec } = require("child_process");
 const { existsSync, rename } = require("fs");
 const app = process.env["APP_WORKSPACE"];
