@@ -38,7 +38,11 @@
     }
   },
   "lint-staged": {
-    "packages/**/src/**/*.{js,jsx,ts,tsx}": [
+    "packages/**/src/**/*.{js,jsx}": [
+      "yarn run --silent lint",
+      "git add"
+    ],
+    "packages/**/src/**/*.{ts,tsx}": [
       "tsc --noEmit",
       "yarn run --silent lint",
       "git add"
