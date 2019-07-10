@@ -2,58 +2,51 @@
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 const spawn = require("child_process").spawn;
-const shared = ["@codeponder/common"];
-
-function gatherDependencies(info, workspace) {
-  let deps = [workspace];
-  let ws = [workspace];
-  while (ws.length) {
-    info[ws[0]].workspaceDependencies.forEach(w => {
-      ws.push(w);
-      deps.push(info[w].location.split("/")[1]);
-    });
-    ws.shift();
-  }
-  return deps;
-}
+const { readFileSync } = require("fs");
 
 async function deploy() {
   const range = process.env["CIRCLE_COMPARE_URL"].split("/").pop();
-  let { stdout: workspaces } = await exec("yarn workspaces info --json");
-  let { stdout: changed } = await exec(
-    `git log --format="" --name-only ${range} packages`
-  );
-  workspaces = JSON.parse(JSON.parse(workspaces).data);
-  changed = new Set(
-    changed
-      .trim()
-      .split(/\r?\n/)
-      .map(path => path.split("/")[1])
-  );
+  const { stdout: yarnOutput } = await exec("yarn workspaces info --json");
+  const { stdout: gitOutput } = await exec(`git log --format="" --name-only ${range} packages`);
+  const workspaces = JSON.parse(JSON.parse(yarnOutput).data);
+  const changed = gitOutput
+    .trim()
+    .split(/\r?\n/)
+    .filter((item, index, self) => self.indexOf(item) === index)
+    .map(path => path.split("/")[1]);
+
+  const hasChanged = workspace => {
+    if (changed.includes(workspace.split("/").pop())) return true;
+    return workspaces[workspace].workspaceDependencies.some(dep => hasChanged(dep));
+  };
+
+  const canDeploy = workspace => {
+    const package = JSON.parse(readFileSync(`${workspaces[workspace].location}/package.json`));
+    return package.scripts && package.scripts["ci:deploy"];
+  };
 
   const needsDeploy = [];
 
-  for (const [k] of Object.entries(workspaces)) {
-    if (shared.includes(k)) continue;
-    const deps = gatherDependencies(workspaces, k);
-    if (deps.some(dep => changed.has(dep))) {
-      needsDeploy.push(k);
+  for (const workspace of Object.keys(workspaces)) {
+    if (hasChanged(workspace) && canDeploy(workspace)) {
+      needsDeploy.push(workspace);
     }
   }
 
-  console.log("\n", "----->", "Deploying workspaces:", needsDeploy.join(", "));
-
-  for (const k of needsDeploy) {
-    const deployment = spawn("yarn", ["run", `ci:deploy:${k}`]);
-    deployment.stdout.on("data", data => {
-      console.log(data.toString());
-    });
-    deployment.stderr.on("data", data => {
-      console.log(data.toString());
-    });
-    deployment.on("error", error => {
-      throw error;
-    });
+  if (needsDeploy.length) {
+    console.log("\n", "----->", "Deploying workspaces:", needsDeploy.join(", "));
+    for (const k of needsDeploy) {
+      const deployment = spawn("yarn", ["run", `ci:deploy:${k}`]);
+      deployment.stdout.on("data", data => {
+        console.log(data.toString());
+      });
+      deployment.stderr.on("data", data => {
+        console.log(data.toString());
+      });
+      deployment.on("error", error => {
+        throw error;
+      });
+    }
   }
 }
 
