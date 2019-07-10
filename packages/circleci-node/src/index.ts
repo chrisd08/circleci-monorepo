@@ -7,7 +7,7 @@ const createTypeormConn = async (): Promise<Connection> => {
   const connectionOptions = (await getConnectionOptions(
     process.env.NODE_ENV
   )) as PostgresConnectionOptions;
-  return process.env.NODE_ENV == "production"
+  return process.env.NODE_ENV === "production"
     ? createConnection({
         ...connectionOptions,
         url: process.env.DATABASE_URL,
@@ -18,7 +18,7 @@ createTypeormConn()
   .then(async connection => {
     console.log("Inserting a new user into the database...");
     const user = new User();
-    user.firstName = "Timber8";
+    user.firstName = "Timber9";
     user.lastName = "Saw";
     user.age = 25;
     await connection.manager.save(user);

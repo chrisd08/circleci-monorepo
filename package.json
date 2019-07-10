@@ -39,7 +39,7 @@
   },
   "lint-staged": {
     "packages/**/src/**/*.{js,jsx,ts,tsx}": [
-      "eslint --max-warnings 0 --fix -c .eslintrc.js --ignore-path .gitignore --cache --ext .js,.jsx,.ts,.tsx .",
+      "yarn run --silent lint",
       "git add"
     ]
   }
