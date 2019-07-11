@@ -1,14 +1,11 @@
 {
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "npmClient": "yarn",
   "useWorkspaces": true,
   "version": "1.0.15",
   "command": {
     "version": {
-      "conventionalCommits": true,
-      "yes": true
+      "conventionalCommits": true
     }
   }
 }
