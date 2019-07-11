@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import logo from "./logo.svg";
-import { DISPLAY_ERROR_CODE } from "@codeponder/common";
+import { DISPLAY_ERROR_CODE } from "@circleci-monorepo/common";
 class App extends Component {
   render() {
     console.log(DISPLAY_ERROR_CODE);
