@@ -13,7 +13,7 @@
     "build": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "test": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts test",
     "eject": "react-scripts eject",
-    "ci:test": "cross-env JEST_JUNIT_OUTPUT=~/reports/react.xml npm run test -- --ci --runInBand --detectOpenHandles --forceExit --testResultsProcessor=jest-junit",
+    "ci:test": "JEST_JUNIT_OUTPUT=$TEST_OUTPUT/react.xml npm run test -- --ci --runInBand --detectOpenHandles --forceExit --testResultsProcessor=jest-junit",
     "ci:deploy": "npm run heroku:deploy",
     "heroku:deploy": "git push https://heroku:$HEROKU_API_KEY@git.heroku.com/insulution-web.git master"
   },

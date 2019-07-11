@@ -23,7 +23,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "test": "cross-env NODE_ENV=test jest",
-    "ci:test": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT=~/reports/node.xml jest --ci --runInBand --detectOpenHandles --forceExit --testResultsProcessor=jest-junit",
+    "ci:test": "JEST_JUNIT_OUTPUT=$TEST_OUTPUT/node.xml jest --ci --runInBand --detectOpenHandles --forceExit --testResultsProcessor=jest-junit",
     "ci:deploy": "npm run heroku:deploy",
     "heroku:deploy": "git push https://heroku:$HEROKU_API_KEY@git.heroku.com/insolution-prod.git master"
   },
