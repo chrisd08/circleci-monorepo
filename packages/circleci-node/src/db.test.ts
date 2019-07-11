@@ -5,7 +5,6 @@ describe("db tests", () => {
   it("create user", async () => {
     const connection = await createConnection();
     const user = new User();
-    expect(user).toBe(true);
     user.firstName = "Timber";
     user.lastName = "Saw";
     user.age = 25;

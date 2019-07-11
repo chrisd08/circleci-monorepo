@@ -34,14 +34,14 @@ jobs:
           key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
           name: "Linter"
-          command: yarn lint --format junit -o reports/junit/js-lint-results.xml
+          command: yarn lint --format junit -o ~/reports/js-lint-results.xml
       - run:
           name: "Test Suite"
           command: yarn ci:test
       - store_test_results:
-          path: reports/junit
+          path: ~/reports
       - store_artifacts:
-          path: reports/junit
+          path: ~/reports
       # deploy
       - compare-url/reconstruct
       - compare-url/use:
