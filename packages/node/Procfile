@@ -1,0 +1,1 @@
+web: cd packages/node && ts-node -T src/index.ts

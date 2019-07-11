@@ -1,9 +1,9 @@
 {
-  "name": "circleci-react",
+  "name": "@circleci-monorepo/react",
   "version": "1.0.15",
   "private": true,
   "dependencies": {
-    "@codeponder/common": "^1.0.14",
+    "@circleci-monorepo/common": "^1.0.14",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.8"

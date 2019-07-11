@@ -1,5 +1,5 @@
 {
-  "name": "@codeponder/common",
+  "name": "@circleci-monorepo/common",
   "version": "1.0.14",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

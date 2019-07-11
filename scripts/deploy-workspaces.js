@@ -29,7 +29,8 @@ async function deploy() {
 
   if (needsDeploy.length) {
     console.log("\n", "----->", "Deploying workspaces:", needsDeploy.join(", "));
-    for (const workspace of needsDeploy) {
+    for (const package of needsDeploy) {
+      const workspace = package.split("/").pop();
       const deployment = spawn("yarn", ["run", `ci:deploy:${workspace}`]);
       deployment.stdout.on("data", data => {
         console.log(data.toString());

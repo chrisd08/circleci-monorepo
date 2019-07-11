@@ -9,8 +9,8 @@
   },
   "scripts": {
     "ci:test": "lerna run ci:test",
-    "ci:deploy:circleci-node": "lerna run ci:deploy --scope={@codeponder/common,circleci-node}",
-    "ci:deploy:circleci-react": "lerna run ci:deploy --scope={@codeponder/common,circleci-react}",
+    "ci:deploy:node": "lerna run ci:deploy --scope={@circleci-monorepo/common,@circleci-monorepo/node}",
+    "ci:deploy:react": "lerna run ci:deploy --scope={@circleci-monorepo/common,@circleci-monorepo/react}",
     "heroku-prebuild": "node scripts/remove-workspaces.js",
     "heroku-postbuild": "node scripts/build-workspaces.js",
     "lint": "eslint --max-warnings 0 --fix -c .eslintrc.js --ignore-path .gitignore --cache --ext .js,.jsx,.ts,.tsx ."
@@ -38,7 +38,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsc -p packages/circleci-node/tsconfig.json --noEmit && lint-staged",
+      "pre-commit": "tsc -p packages/node/tsconfig.json --noEmit && lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },

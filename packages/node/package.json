@@ -1,5 +1,5 @@
 {
-  "name": "circleci-node",
+  "name": "@circleci-monorepo/node",
   "private": true,
   "version": "1.0.10",
   "description": "Awesome project developed with TypeORM.",
@@ -12,7 +12,7 @@
     "ts-jest": "^24.0.0"
   },
   "dependencies": {
-    "@codeponder/common": "^1.0.14",
+    "@circleci-monorepo/common": "^1.0.14",
     "ioredis": "^4.6.2",
     "pg": "^7.3.0",
     "reflect-metadata": "^0.1.10",
