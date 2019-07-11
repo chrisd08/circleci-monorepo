@@ -11,7 +11,7 @@
   "scripts": {
     "start": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "build": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts build",
-    "test": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts test --testResultsProcessor=jest-junit",
+    "test": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts test",
     "eject": "react-scripts eject",
     "ci:test": "npm run test",
     "ci:deploy": "npm run heroku:deploy",
